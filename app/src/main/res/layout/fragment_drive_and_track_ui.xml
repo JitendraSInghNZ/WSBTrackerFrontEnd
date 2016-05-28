@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="@color/blue_grey_800"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+<Button
+    android:id="@+id/start_driving_button"
+    android:text="Start Driving"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/ThemeOverlay.MyDarkButton"/>
+    <Button
+        android:id="@+id/view_bus_location_button"
+        android:text="View Bus Location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.MyDarkButton"/>
+    <Button
+        android:id="@+id/coordinate_task_button"
+        android:text="Coordinator Task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.MyDarkButton"/>
+    <TextView
+        android:id="@+id/response_code_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
