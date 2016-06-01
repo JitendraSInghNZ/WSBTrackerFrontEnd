@@ -1,0 +1,2 @@
+# WSBTrackerFrontEnd
+This is the front end for an android cloud based project called WSBTracker(https://github.com/bahusvel/WSBTracker). It is a prototype app which helps the parent sending their child to walking school bus to track the location of bus in real time. The parent don't have to wait outside the house along with the child for the bus, when the bus approaches the location of parent in certain radius(meter) a push notification is send and that way parent is informed.
