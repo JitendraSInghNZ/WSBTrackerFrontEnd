@@ -56,4 +56,5 @@
     <string name="enter_email">Email:</string>
     <string name="enter_password">Password:</string>
     <string name="title_activity_gmap_follow">GMapFollowActivity</string>
+
 </resources>

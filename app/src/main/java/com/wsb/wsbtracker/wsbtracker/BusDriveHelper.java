@@ -24,9 +24,11 @@ public class BusDriveHelper extends AsyncTask<String,Void,String>{
     protected String doInBackground(String... params) {
         BufferedReader reader= null;
         String JSONResponse = null;
+        String JSONResponse2 = null;
         StringBuilder stringBuilder = new StringBuilder();
         HttpsURLConnection httpsURLConnection = null;
         JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
         try {
             jsonObject.put("Bus",new JSONObject().put("Number",202));
             jsonObject.put("Operation","drive");
@@ -58,10 +60,61 @@ public class BusDriveHelper extends AsyncTask<String,Void,String>{
             finalOutput = stringBuilder.toString();
         }
         catch (MalformedURLException mue){
-
+            Log.e("FirstTask",mue.getMessage());
         }
         catch (IOException ioe){
+            Log.e("FirstTask",ioe.getMessage());
+        }
+        finally {
+            if(httpsURLConnection != null){
+                httpsURLConnection.disconnect();
+            }
+            if(reader != null){
+                try {
+                    reader.close();
+                }
+                catch (IOException ioe){
+                    Log.e("Stream", " closing stream error");
+                }
+            }
+        }
+        try{
+            jsonObject2.put("PushToken",params[1]);
+            jsonObject2.put("AuthToken",params[0]);
+        }
+        catch (JSONException jse){
 
+        }
+        try{
+            URL url = new URL("https://wsbtracker.appspot.com/push/token");
+            httpsURLConnection = (HttpsURLConnection)url.openConnection();
+            httpsURLConnection.setConnectTimeout(10000);
+            httpsURLConnection.setRequestMethod("POST");
+            httpsURLConnection.setDoOutput(true);
+            httpsURLConnection.setDoInput(true);
+            httpsURLConnection.setRequestProperty("Content-Type","application/json");
+            httpsURLConnection.setRequestProperty("Accept","application/json");
+            httpsURLConnection.setRequestProperty("Accept-Encoding", "gzip");
+            httpsURLConnection.connect();
+            OutputStream outputStream = httpsURLConnection.getOutputStream();
+
+            byte[] outputInBytes = jsonObject2.toString().getBytes("UTF-8");
+            //Log.i("JSON2",jsonObject2.toString());
+            outputStream.write(outputInBytes);
+            outputStream.flush();
+            outputStream.close();
+            reader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream()));
+            while ((JSONResponse2 = reader.readLine()) != null){
+                stringBuilder.append(JSONResponse2);
+                String output = stringBuilder.toString();
+                Log.i("SecondTask",output);
+            }
+        }
+        catch (MalformedURLException mue){
+            Log.e("SecondTask",mue.getMessage());
+        }
+        catch (IOException ioe){
+            Log.e("SecondTask",ioe.getMessage());
         }
         finally {
             if(httpsURLConnection != null){

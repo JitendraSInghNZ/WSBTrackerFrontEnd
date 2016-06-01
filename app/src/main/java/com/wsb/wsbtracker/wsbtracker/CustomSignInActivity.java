@@ -1,6 +1,7 @@
 package com.wsb.wsbtracker.wsbtracker;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,11 +16,17 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonSerializable;
 import com.fasterxml.jackson.databind.JsonSerializer;
+import com.wsb.wsbtracker.wsbtracker.constants.RegistrationConstants;
+import com.wsb.wsbtracker.wsbtracker.constants.StoredRegistrationConstant;
+import com.wsb.wsbtracker.wsbtracker.gcm.RegistrationIntentService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.util.concurrent.ExecutionException;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class CustomSignInActivity extends AppCompatActivity {
 
@@ -28,6 +35,7 @@ public class CustomSignInActivity extends AppCompatActivity {
     private Button mSubmitButton;
     private Button mDriveBusButton;
     private TextView mOutputTextView;
+    private TextView mTokenTextView;
     private String mEmail;
     private String mPassword;
     private String mOutput;
@@ -41,6 +49,7 @@ public class CustomSignInActivity extends AppCompatActivity {
         mPasswordEditText = (EditText)findViewById(R.id.password);
         mSubmitButton = (Button)findViewById(R.id.login_button);
         mOutputTextView = (TextView)findViewById(R.id.output);
+        mTokenTextView = (TextView)findViewById(R.id.token);
         mDriveBusButton = (Button)findViewById(R.id.create_bus_button);
         mDriveBusButton.setEnabled(false);
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +83,7 @@ public class CustomSignInActivity extends AppCompatActivity {
                         //startActivity(i);
                     }
                     mOutputTextView.setText(response);
+                    mTokenTextView.setText(StoredRegistrationConstant.TOKEN_ID);
                 }
             }
         });
@@ -81,22 +91,24 @@ public class CustomSignInActivity extends AppCompatActivity {
         mDriveBusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    mJudgementDriveString = new BusDriveHelper().execute(mResponse).get();
-                    Log.i("CustomSignInActivity",mJudgementDriveString);
-                }
-                catch (InterruptedException ie) {
+                try {
+                    mJudgementDriveString = new BusDriveHelper().execute(mResponse,StoredRegistrationConstant.TOKEN_ID).get();
+                    Log.i("CustomSignInActivity", mJudgementDriveString);
+                } catch (InterruptedException ie) {
 
                 } catch (ExecutionException ee) {
 
                 }
 
-                if(!mJudgementDriveString.equals(null)){
-                    Intent i = DriveAndTrackUIActivity.newIntent(getApplicationContext(),mResponse);
+                if (!mJudgementDriveString.equals(null)) {
+                    Intent i = DriveAndTrackUIActivity.newIntent(getApplicationContext(), mResponse);
                     startActivity(i);
                 }
             }
         });
-    }
 
+        Intent service = new Intent(this, RegistrationIntentService.class);
+       startService(service);
+    }
 }
+

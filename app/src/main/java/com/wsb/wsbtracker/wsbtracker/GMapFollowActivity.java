@@ -48,7 +48,7 @@ public class GMapFollowActivity extends AppCompatActivity implements OnMapReadyC
     private MarkerOptions mMarkerOptions;
     private LatLng mLatLng;
     private String mJsonString;
-    private int mInterval = 10000;
+    private int mInterval = 5000;
     private android.os.Handler mHandler;
     private HandlerThread mHandlerThread;
     //private GMapFollowTask mGMapFollowTask;
@@ -112,7 +112,8 @@ public class GMapFollowActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        mGoogleMap.setMyLocationEnabled(true);
+        //mGoogleMap.setMyLocationEnabled(true);
+        mGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         initializePolyline();
     }
 
@@ -134,7 +135,7 @@ public class GMapFollowActivity extends AppCompatActivity implements OnMapReadyC
 
     private void updateCamera() {
         mGoogleMap
-                .animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng, 16));
+                .animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng, 20));
     }
 
     private void updateMarker() {
