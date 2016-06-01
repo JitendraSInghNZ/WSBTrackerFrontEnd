@@ -39,7 +39,7 @@
     <string name="name_auth_code_activity">ServerAuthCodeActivity</string>
     <!-- Server Client ID.  This should be a valid Web OAuth 2.0 Client ID obtained
         from https://console.developers.google.com/ -->
-    <string name="server_client_id">520105391907-4stp5renalf4v0i3abna1d1h22270bln.apps.googleusercontent.com</string>
+    <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
     <string name="internet_connection_unavailable">Connection Unavailable</string>
     <string name="code_for_school">Enter the code for your school</string>
     <string name="logged_in_as">Logged In As : </string>
