@@ -1,29 +1,29 @@
 {
   "project_info": {
-    "project_number": "329344038365",
-    "project_id": "myfirstproject-1280"
+    "project_number": "YOUR_PROJECT_NUMBER",
+    "project_id": "YOUR_PROJECT_ID"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:329344038365:android:8b30c370ee162521",
+        "mobilesdk_app_id": "YOUR_MOBILE_APP_ID",
         "android_client_info": {
           "package_name": "com.wsb.wsbtracker.wsbtracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "329344038365-6inlpk4pd0tupbjei5s4irk1ig6oudef.apps.googleusercontent.com",
+          "client_id": "YOUR_CLIENT_ID",
           "client_type": 1,
           "android_info": {
             "package_name": "com.wsb.wsbtracker.wsbtracker",
-            "certificate_hash": "4653FF9660C7121E23CD36E2CD712EA2F56AEE54"
+            "certificate_hash": "YOUR_CERTIFICATE_HASH"
           }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBavcaLqDRmxCGBvXKF8Rk64wcTc3F1Z7I"
+          "current_key": "YOUR_API_KEY"
         }
       ],
       "services": {
